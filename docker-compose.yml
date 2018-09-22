@@ -4,8 +4,6 @@ version: '3'
 # Containers to run
 services:
   phoenix:
-    # build:
-      # context: .
     image: phoenix
 
     environment:
