@@ -1,0 +1,45 @@
+# docker-compose version
+version: '3'
+
+# Containers to run
+services:
+  phoenix:
+    # build:
+      # context: .
+    image: phoenix
+
+    environment:
+     - SERVICE_PORTS=4000 # For HAProxy
+
+    ports:
+     - 4000
+
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+    networks:
+      - web
+
+  proxy:
+    image: dockercloud/haproxy
+    depends_on:
+      - phoenix
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+    networks:
+      - web
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  web:
+    driver: overlay
