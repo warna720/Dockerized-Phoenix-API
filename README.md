@@ -18,10 +18,10 @@ GET `/results`
 
 Fetch the results for a specific league and division pair
 
-GET `/results/<season>/<div>` e.g. `/results/201617/SP1`
+GET `/results/<season>/<division>` e.g. `/results/201617/SP1`
 
 ## Possible code improvements
-* Seed data from csv to a DB and fetch results from DB instead of parsing the CSV file every request
+* Seed data from CSV to a DB and fetch results from DB instead of parsing the CSV file every request
 * Use model when fetching from DB
 * Integrate a logging container with docker and log to it from the API
 * Unit-tests
