@@ -11,6 +11,9 @@ WORKDIR /app
 # --force to skip typing "Y" to confirm installation
 RUN mix local.hex --force
 
+# Fetch deps
+RUN mix deps.get
+
 # Compile
 RUN mix do compile
 
